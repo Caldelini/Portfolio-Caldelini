@@ -29,7 +29,7 @@
     <style>
         /* CSS pour le filtrage par opacité croisée (Focus) */
         .project-card {
-            will-change: transform, opacity, filter;
+            will-change: transform, opacity;
             opacity: 1;
             transform: scale(1);
             filter: blur(0px) grayscale(0%);
@@ -137,7 +137,6 @@
                         color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
                         background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
                         box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, box-shadow;
         }
         .skill-badge:hover {
             transform: scale(1.05);
@@ -166,7 +165,6 @@
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
                         background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
                         box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, box-shadow;
         }
         .shadow-accent-glow:hover {
             box-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
@@ -192,10 +190,11 @@
             75% { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
         }
 
-        /* Aberration chromatique sur les textes, boutons, étiquettes et particules, mais pas sur les médias */
-        #particles-bg,
-        h1, h2, h3, p, a, button, span, .glow-keyword, .skill-badge, .project-card > div.absolute {
-            filter: url(#chromatic-aberration);
+        /* Aberration chromatique appliquée uniquement aux grands titres et mots-clés sur ordinateurs pour de superbes performances */
+        @media (hover: hover) and (pointer: fine) {
+            h1, h2, h3, .glow-keyword {
+                filter: url(#chromatic-aberration);
+            }
         }
 
         /* Overlay vidéo interactif */
@@ -345,16 +344,14 @@
 
         <!-- GRILLE BENTO ASYMÉTRIQUE -->
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 md:auto-rows-[340px] grid-flow-dense relative min-h-[340px]" id="portfolio-grid">
-            
-            <!-- Message de résultat vide -->
             <div id="no-results-msg" class="absolute inset-0 opacity-0 invisible pointer-events-none flex flex-col items-center justify-center text-muted text-lg transition-all duration-500 z-10">
                 <p>Aucune réalisation ne correspond à cette sélection.</p>
             </div>
 
-            <!-- ================================================================= -->
+<!-- ================================================================= -->
             <!-- [DEBUT] SPOT LUNEDEL                                              -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-100" data-category="captation montage short">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-100 " data-category="captation montage short">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Captation</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
@@ -374,9 +371,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: ÉCLAT NOCTURNE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-200 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178859/_DSF3653_-_Grande_zs1zln" data-title="Éclat Nocturne">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178859/_DSF3653_-_Grande_zs1zln" alt="Éclat Nocturne" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Éclat Nocturne</h3>
+                    <p class="text-muted text-sm mt-1">Série Daïki en clair-obscur</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: ÉCLAT NOCTURNE                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: REFLET URBAIN                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-300 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178859/_DSF2384_-_Grande_rjxp2d" data-title="Reflet Urbain">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178859/_DSF2384_-_Grande_rjxp2d" alt="Reflet Urbain" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Reflet Urbain</h3>
+                    <p class="text-muted text-sm mt-1">Capture de vie à travers la vitre</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: REFLET URBAIN                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] ITW MY FUTURE                                             -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-200" data-category="captation montage motion short">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-400 " data-category="captation montage motion short">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Captation</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
@@ -397,9 +442,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: BRUME INDUSTRIELLE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-500 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178858/_DSF0530_-_Grande_ldchvc" data-title="Brume Industrielle">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178858/_DSF0530_-_Grande_ldchvc" alt="Brume Industrielle" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Brume Industrielle</h3>
+                    <p class="text-muted text-sm mt-1">Atmosphère matinale sur les docks</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: BRUME INDUSTRIELLE                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: NÉON MÉLANCOLIE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178858/_DSF3643_-_Grande_t8jobm" data-title="Néon Mélancolie">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178858/_DSF3643_-_Grande_t8jobm" alt="Néon Mélancolie" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Néon Mélancolie</h3>
+                    <p class="text-muted text-sm mt-1">Portrait de nuit sous éclairage artificiel</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: NÉON MÉLANCOLIE                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] REPORTAGE ELEVAGE BOVIN                                   -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-300" data-category="captation montage long">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-200 " data-category="captation montage long">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Captation</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
@@ -419,9 +512,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: GÉOMÉTRIE URBAINE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-300 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178858/Domino-210_-_Grande_nibmil" data-title="Géométrie Urbaine">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178858/Domino-210_-_Grande_nibmil" alt="Géométrie Urbaine" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Géométrie Urbaine</h3>
+                    <p class="text-muted text-sm mt-1">Lignes architecturales et contrastes</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: GÉOMÉTRIE URBAINE                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: CAROTTE IS BLUE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-400 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178857/Carotte_is_blue-3_-_Grande_ff0yp2" data-title="Carotte is Blue">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178857/Carotte_is_blue-3_-_Grande_ff0yp2" alt="Carotte is Blue" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Carotte is Blue</h3>
+                    <p class="text-muted text-sm mt-1">Exploration chromatique en studio</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: CAROTTE IS BLUE                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] EXTRAIT HORIZONTAL SPECTACLE CLAQUETTES                   -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-400" data-category="captation montage short">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-500 " data-category="captation montage short">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Captation</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
@@ -441,9 +582,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: L'HOMME AU CHAPEAU                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178857/Chapeau-346_-_Grande_d321rh" data-title="L'Homme au Chapeau">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178857/Chapeau-346_-_Grande_d321rh" alt="L'Homme au Chapeau" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">L'Homme au Chapeau</h3>
+                    <p class="text-muted text-sm mt-1">Jeu d'ombres et silhouettes</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: L'HOMME AU CHAPEAU                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: LIGNES ÉPURÉES                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-200 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178857/Domino-228_-_Grande_eacrwi" data-title="Lignes Épurées">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178857/Domino-228_-_Grande_eacrwi" alt="Lignes Épurées" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Lignes Épurées</h3>
+                    <p class="text-muted text-sm mt-1">Composition graphique et espace négatif</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: LIGNES ÉPURÉES                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] MOTION DESIGN GENERIQUE                                   -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-500" data-category="motion long">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-300 " data-category="motion long">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Motion Design</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Format Long</span>
@@ -462,9 +651,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: CAROTTE BREAKFAST                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-400 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178799/Carotte_Breakfast-6_q683av" data-title="Carotte Breakfast">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178799/Carotte_Breakfast-6_q683av" alt="Carotte Breakfast" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Carotte Breakfast</h3>
+                    <p class="text-muted text-sm mt-1">Nostalgie matinale et teintes chaudes</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: CAROTTE BREAKFAST                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: AMBIANCE CINÉMA                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-500 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178798/_DSF3690_bzagjy" data-title="Ambiance Cinéma">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178798/_DSF3690_bzagjy" alt="Ambiance Cinéma" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Ambiance Cinéma</h3>
+                    <p class="text-muted text-sm mt-1">Daïki dans l'intimité du studio</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: AMBIANCE CINÉMA                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] INTRO EMISSION MUSIQUE                                    -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-100" data-category="motion short">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-100 " data-category="motion short">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Motion Design</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Short</span>
@@ -483,9 +720,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: FISHEYE VOLCANIQUE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-200 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178798/Fisheye_ville_volcanique-4_dxzxbb" data-title="Fisheye Volcanique">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178798/Fisheye_ville_volcanique-4_dxzxbb" alt="Fisheye Volcanique" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Fisheye Volcanique</h3>
+                    <p class="text-muted text-sm mt-1">Courbure de l'horizon urbain</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: FISHEYE VOLCANIQUE                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: CONTRASTES PARISIENS                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-300 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178798/_DSF1742_nfka6y" data-title="Contrastes Parisiens">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178798/_DSF1742_nfka6y" alt="Contrastes Parisiens" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Contrastes Parisiens</h3>
+                    <p class="text-muted text-sm mt-1">Ombres portées sur les pavés</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: CONTRASTES PARISIENS                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] HYPERLAPSE EXPERIMENT                                     -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-200" data-category="captation montage short">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-400 " data-category="captation montage short">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Captation</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
@@ -505,9 +790,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: PREMIÈRE SORTIE I                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-500 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-1" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Premiere_sortie_photos-1_eqo1m2" data-title="Première Sortie I">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-square md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Premiere_sortie_photos-1_eqo1m2" alt="Première Sortie I" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Première Sortie I</h3>
+                    <p class="text-muted text-sm mt-1">Instantané volé dans la rue</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: PREMIÈRE SORTIE I                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: LUMIÈRE DORÉE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/_DSF1719_jiq9x1" data-title="Lumière Dorée">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/_DSF1719_jiq9x1" alt="Lumière Dorée" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Lumière Dorée</h3>
+                    <p class="text-muted text-sm mt-1">Heure dorée sur les toits</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: LUMIÈRE DORÉE                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] ARTISAN BOUCHER                                           -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-300" data-category="captation montage long">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-200 " data-category="captation montage long">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Captation</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
@@ -527,9 +860,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: PREMIÈRE SORTIE II                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-300 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-1" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Premiere_sortie_photos-2_aac0gv" data-title="Première Sortie II">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-square md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Premiere_sortie_photos-2_aac0gv" alt="Première Sortie II" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Première Sortie II</h3>
+                    <p class="text-muted text-sm mt-1">Composition géométrique et passant</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: PREMIÈRE SORTIE II                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: PARIS LUMIÈRES                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-400 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Lumière_d_un_soir_parisien_mkuew0" data-title="Paris Lumières">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Lumière_d_un_soir_parisien_mkuew0" alt="Paris Lumières" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Paris Lumières</h3>
+                    <p class="text-muted text-sm mt-1">Atmosphère nocturne et phares de voitures</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: PARIS LUMIÈRES                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] VOYAGE NORVEGE TREND                                      -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-400" data-category="captation montage short">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-500 " data-category="captation montage short">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Captation</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
@@ -549,9 +930,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: FOCUS CAROTTE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-1" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Carotte_ql9yxv" data-title="Focus Carotte">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-square md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Carotte_ql9yxv" alt="Focus Carotte" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Focus Carotte</h3>
+                    <p class="text-muted text-sm mt-1">Détails et textures en gros plan</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: FOCUS CAROTTE                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: PERSPECTIVE VERTICALE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-200 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178796/_DSF3980_nfwh5p" data-title="Perspective Verticale">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178796/_DSF3980_nfwh5p" alt="Perspective Verticale" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Perspective Verticale</h3>
+                    <p class="text-muted text-sm mt-1">Lignes de fuite vers le ciel</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: PERSPECTIVE VERTICALE                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] APPEL FIGURATION                                          -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-500" data-category="captation montage short">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-300 " data-category="captation montage short">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Captation</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
@@ -571,9 +1000,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: RÊVERIE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-400 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178796/42307685-CF0C-4555-84EE-EFDF60C90C95-862-0000019A7FB9B1CA_vyo9c9" data-title="Rêverie">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178796/42307685-CF0C-4555-84EE-EFDF60C90C95-862-0000019A7FB9B1CA_vyo9c9" alt="Rêverie" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Rêverie</h3>
+                    <p class="text-muted text-sm mt-1">Portrait en extérieur et flou artistique</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: RÊVERIE                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: TEXTURE SILENCIEUSE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-500 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178796/EFE6429D-82BD-44F9-9B9C-9DFE6E74CB29-862-0000019D06D6EDCB_akkxfa" data-title="Texture Silencieuse">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178796/EFE6429D-82BD-44F9-9B9C-9DFE6E74CB29-862-0000019D06D6EDCB_akkxfa" alt="Texture Silencieuse" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Texture Silencieuse</h3>
+                    <p class="text-muted text-sm mt-1">Sensation de calme et grain marqué</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: TEXTURE SILENCIEUSE                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] ELEVEUR DE MOUTONS                                        -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-100" data-category="captation montage long">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-100 " data-category="captation montage long">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Captation</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
@@ -593,9 +1070,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: DOUCEUR ARGENTIQUE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-200 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178217/DSCF6029_-_Grande_eyd7re" data-title="Douceur Argentique">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178217/DSCF6029_-_Grande_eyd7re" alt="Douceur Argentique" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Douceur Argentique</h3>
+                    <p class="text-muted text-sm mt-1">Portrait à l'esthétique rétro</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: DOUCEUR ARGENTIQUE                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: VIETNAM SAUVAGE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-300 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178217/Vietnam-1_-_Grande_pub0yz" data-title="Vietnam Sauvage">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178217/Vietnam-1_-_Grande_pub0yz" alt="Vietnam Sauvage" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Vietnam Sauvage</h3>
+                    <p class="text-muted text-sm mt-1">Route sinueuse dans les montagnes</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: VIETNAM SAUVAGE                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] CONFERENCE MEDICALE                                       -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-200" data-category="montage motion short">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-400 " data-category="montage motion short">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Motion Design</span>
@@ -615,9 +1140,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: VIBRATION ROUGE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-500 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178216/_DSF7029_-_Grande_zo80at" data-title="Vibration Rouge">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178216/_DSF7029_-_Grande_zo80at" alt="Vibration Rouge" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Vibration Rouge</h3>
+                    <p class="text-muted text-sm mt-1">Daïki sous la lumière des projecteurs</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: VIBRATION ROUGE                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: GRAIN NOSTALGIE                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178216/DSCF5627_-_Grande_zwpnft" data-title="Grain Nostalgie">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178216/DSCF5627_-_Grande_zwpnft" alt="Grain Nostalgie" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Grain Nostalgie</h3>
+                    <p class="text-muted text-sm mt-1">Regard direct et texture brute</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: GRAIN NOSTALGIE                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] MOTION DESIGN HABILLAGE                                   -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-300" data-category="motion long">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-200 " data-category="motion long">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Motion Design</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Format Long</span>
@@ -636,9 +1209,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: ERRANCE AU VIETNAM                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-300 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178216/Vietnam-2-2_-_Grande_sxjqvq" data-title="Errance au Vietnam">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178216/Vietnam-2-2_-_Grande_sxjqvq" alt="Errance au Vietnam" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Errance au Vietnam</h3>
+                    <p class="text-muted text-sm mt-1">Marché local et scènes quotidiennes</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: ERRANCE AU VIETNAM                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: SÉRÉNITÉ AU VIETNAM                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-400 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178215/Vietnam-3_-_Grande_jkdqbp" data-title="Sérénité au Vietnam">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178215/Vietnam-3_-_Grande_jkdqbp" alt="Sérénité au Vietnam" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Sérénité au Vietnam</h3>
+                    <p class="text-muted text-sm mt-1">Barque glissant sur l'eau calme</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: SÉRÉNITÉ AU VIETNAM                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] PODCAST NINA RAMEN                                        -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-400" data-category="montage motion short">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2 animate-fade-in-up delay-500 " data-category="montage motion short">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Montage</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Motion Design</span>
@@ -658,9 +1279,57 @@
             <!-- ================================================================= -->
 
             <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: DAÏKI EN MOUVEMENT                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178185/IMG_6659_preotz" data-title="Daïki en Mouvement">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178185/IMG_6659_preotz" alt="Daïki en Mouvement" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Daïki en Mouvement</h3>
+                    <p class="text-muted text-sm mt-1">Session de skate capturée sur le vif</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: DAÏKI EN MOUVEMENT                                                -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: REGARD DE DAÏKI                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-200 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178163/DSCF5692_uivmsk" data-title="Regard de Daïki">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-[9/16] md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178163/DSCF5692_uivmsk" alt="Regard de Daïki" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Regard de Daïki</h3>
+                    <p class="text-muted text-sm mt-1">Portrait argentique intime</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: REGARD DE DAÏKI                                                -->
+            <!-- ================================================================= -->
+
+<!-- ================================================================= -->
             <!-- [DEBUT] MOTION DESIGN INFOGRAPHIE                                 -->
             <!-- ================================================================= -->
-            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-500" data-category="motion long">
+            <div class="project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2 animate-fade-in-up delay-300 " data-category="motion long">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Motion Design</span>
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Format Long</span>
@@ -676,7 +1345,31 @@
             </div>
             <!-- ================================================================= -->
             <!-- [FIN] MOTION DESIGN INFOGRAPHIE                                   -->
-            <!-- ================================================================= -->         <!-- ================================================================= -->
+            <!-- ================================================================= -->
+
+            <!-- ================================================================= -->
+            <!-- [DEBUT] PHOTO: FAUSSES COPINES COVER                                              -->
+            <!-- ================================================================= -->
+            <div class="animate-fade-in-up delay-400 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-1" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783177781/Fausses_Copines_Cover_-_Grande_uo5bsb" data-title="Fausses Copines Cover">
+                <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
+                </div>
+                <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-square md:aspect-auto cursor-pointer lightbox-trigger">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783177781/Fausses_Copines_Cover_-_Grande_uo5bsb" alt="Fausses Copines Cover" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="p-5 mt-auto">
+                    <h3 class="text-xl font-semibold">Fausses Copines Cover</h3>
+                    <p class="text-muted text-sm mt-1">Visuel d'album graphique et coloré</p>
+                </div>
+            </div>
+            <!-- ================================================================= -->
+            <!-- [FIN] PHOTO: FAUSSES COPINES COVER                                                -->
+            <!-- ================================================================= -->
 
         </div>
 
@@ -985,13 +1678,22 @@
             let animationFrameId;
 
             // Paramètres d'optimisation (très fin, très discret, performant)
-            const PARTICLE_COUNT = Math.min(window.innerWidth / 15, 100); // Limit count on big screens
-            const CONNECTION_DISTANCE = 120;
+            // Détection des appareils tactiles pour adapter le nombre de particules et désactiver les liaisons lourdes
+            const isTouchDevice = !window.matchMedia('(hover: hover)').matches;
+            const PARTICLE_COUNT = isTouchDevice ? 15 : Math.min(window.innerWidth / 15, 100);
+            const CONNECTION_DISTANCE = isTouchDevice ? 0 : 120;
             const MOUSE_REPEL_RADIUS = 150;
             const PARTICLE_BASE_OPACITY = 0.4;
             const LINE_BASE_OPACITY = 0.15;
 
+            let lastWidth = 0;
             function resizeCanvas() {
+                // Si la largeur n'a pas changé (cas classique du défilement sur mobile avec la barre d'adresse),
+                // on évite de réinitialiser le canvas et les particules pour prévenir les saccades.
+                if (window.innerWidth === lastWidth && canvas.width > 0) {
+                    return;
+                }
+                lastWidth = window.innerWidth;
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 initParticles();
@@ -1016,55 +1718,43 @@
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 1.5 + 0.5; // Très petits points
-                    this.baseX = this.x;
-                    this.baseY = this.y;
-                    this.density = (Math.random() * 20) + 1;
-                    this.vx = (Math.random() - 0.5) * 0.5; // Mouvement très lent
-                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.size = Math.random() * 2 + 0.5; // Profondeur avec différentes tailles
+                    this.vx = (Math.random() - 0.5) * 0.2; // Dérive horizontale très lente
+                    this.vy = -(Math.random() * 0.4 + 0.1); // Flottement lent vers le haut
+                    this.alpha = Math.random() * 0.35 + 0.05; // Opacité aléatoire
+                    // 15% de braises rouges cinéma, 85% de poussières blanches de projecteur
+                    this.isRed = Math.random() > 0.85;
+                    this.pulseSpeed = Math.random() * 0.02 + 0.005;
+                    this.pulsePhase = Math.random() * Math.PI * 2;
                 }
 
                 update() {
-                    // Mouvement naturel lent
                     this.x += this.vx;
                     this.y += this.vy;
+                    this.pulsePhase += this.pulseSpeed;
 
-                    // Rebond sur les bords avec correction de position pour éviter le blocage
-                    if (this.x < 0) {
-                        this.x = 0;
-                        this.vx = -this.vx;
-                    } else if (this.x > canvas.width) {
-                        this.x = canvas.width;
-                        this.vx = -this.vx;
+                    // Recyclage des particules qui sortent de l'écran
+                    if (this.y < -10) {
+                        this.y = canvas.height + 10;
+                        this.x = Math.random() * canvas.width;
                     }
-                    
-                    if (this.y < 0) {
-                        this.y = 0;
-                        this.vy = -this.vy;
-                    } else if (this.y > canvas.height) {
-                        this.y = canvas.height;
-                        this.vy = -this.vy;
-                    }
-
-                    // Interaction avec la souris (repousse légèrement les particules)
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < MOUSE_REPEL_RADIUS && distance > 0) {
-                        let force = (MOUSE_REPEL_RADIUS - distance) / MOUSE_REPEL_RADIUS;
-                        let forceDirectionX = dx / distance;
-                        let forceDirectionY = dy / distance;
-                        let directionX = forceDirectionX * force * this.density;
-                        let directionY = forceDirectionY * force * this.density;
-                        // Répulsion très douce
-                        this.x -= directionX * 0.05;
-                        this.y -= directionY * 0.05;
+                    if (this.x < -10) {
+                        this.x = canvas.width + 10;
+                    } else if (this.x > canvas.width + 10) {
+                        this.x = -10;
                     }
                 }
 
                 draw() {
-                    ctx.fillStyle = `rgba(250, 250, 250, ${PARTICLE_BASE_OPACITY})`;
+                    // Effet de pulsation douce d'opacité
+                    let currentOpacity = this.alpha * (0.6 + 0.4 * Math.sin(this.pulsePhase));
+                    
+                    if (this.isRed) {
+                        ctx.fillStyle = `rgba(229, 9, 20, ${currentOpacity})`;
+                    } else {
+                        ctx.fillStyle = `rgba(250, 250, 250, ${currentOpacity})`;
+                    }
+
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.closePath();
@@ -1086,7 +1776,7 @@
                 if (mouse.x !== -1000 && mouse.y !== -1000) {
                     glowAlpha = 1;
                 } else {
-                    glowAlpha = Math.max(0, glowAlpha - 0.02); // Décroissance progressive lente (env. 0.5s)
+                    glowAlpha = Math.max(0, glowAlpha - 0.02);
                 }
 
                 // Dessiner la lueur radiale de suivi de souris (effet TryKala Rouge Cinéma)
@@ -1101,28 +1791,12 @@
                     ctx.fill();
                 }
 
+                // Dessiner et mettre à jour toutes les particules
                 for (let i = 0; i < particles.length; i++) {
                     particles[i].update();
                     particles[i].draw();
-
-                    // Relier les particules distinctes entre elles
-                    for (let j = i + 1; j < particles.length; j++) {
-                        let dx = particles[i].x - particles[j].x;
-                        let dy = particles[i].y - particles[j].y;
-                        let distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < CONNECTION_DISTANCE) {
-                            // Plus elles sont proches, plus la ligne est visible
-                            let opacityValue = LINE_BASE_OPACITY * (1 - distance / CONNECTION_DISTANCE);
-                            ctx.beginPath();
-                            ctx.strokeStyle = `rgba(250, 250, 250, ${opacityValue})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
                 }
+                
                 animationFrameId = requestAnimationFrame(animateParticles);
             }
 
@@ -1180,8 +1854,8 @@
                     const activateCard = (e) => {
                         card.classList.add('is-active');
                     };
-                    overlay.addEventListener('pointerdown', activateCard);
-                    overlay.addEventListener('touchstart', activateCard);
+                    overlay.addEventListener('pointerdown', activateCard, { passive: true });
+                    overlay.addEventListener('touchstart', activateCard, { passive: true });
 
                     // Fallback de sécurité au clic
                     overlay.addEventListener('click', (e) => {
@@ -1256,7 +1930,176 @@
                     setTimeout(playShowreel, 600);
                 });
             });
+
+
+            /* --- 6. GESTION DU LIGHTBOX PHOTO --- */
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxSubtitle = document.getElementById('lightbox-subtitle');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+
+            let activePhotos = [];
+            let currentPhotoIndex = 0;
+
+            function updateActivePhotos() {
+                activePhotos = [];
+                const allPhotoCards = document.querySelectorAll('.project-card[data-category*="photo"]');
+                allPhotoCards.forEach(card => {
+                    if (!card.classList.contains('is-hidden')) {
+                        activePhotos.push({
+                            src: card.getAttribute('data-src'),
+                            title: card.getAttribute('data-title'),
+                            subtitle: card.querySelector('.text-muted') ? card.querySelector('.text-muted').textContent : 'Série photographique',
+                            element: card
+                        });
+                    }
+                });
+            }
+
+            function openLightbox(photoSrc) {
+                updateActivePhotos();
+                
+                currentPhotoIndex = activePhotos.findIndex(p => p.src === photoSrc);
+                if (currentPhotoIndex === -1) return;
+
+                lightbox.classList.remove('opacity-0', 'pointer-events-none');
+                lightbox.classList.add('opacity-100', 'pointer-events-auto');
+                document.body.classList.add('overflow-hidden');
+
+                showPhoto(currentPhotoIndex);
+            }
+
+            function closeLightbox() {
+                lightbox.classList.add('opacity-0', 'pointer-events-none');
+                lightbox.classList.remove('opacity-100', 'pointer-events-auto');
+                document.body.classList.remove('overflow-hidden');
+                
+                setTimeout(() => {
+                    lightboxImg.src = '';
+                    lightboxImg.classList.add('opacity-0', 'scale-95');
+                }, 300);
+            }
+
+            function showPhoto(index) {
+                if (index < 0 || index >= activePhotos.length) return;
+                currentPhotoIndex = index;
+                const photo = activePhotos[index];
+
+                lightboxImg.classList.remove('opacity-100', 'scale-100');
+                lightboxImg.classList.add('opacity-0', 'scale-95');
+
+                setTimeout(() => {
+                    lightboxImg.src = photo.src;
+                    lightboxImg.alt = photo.title;
+                    lightboxTitle.textContent = photo.title;
+                    lightboxSubtitle.textContent = photo.subtitle;
+                    lightboxCounter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(activePhotos.length).padStart(2, '0')}`;
+
+                    lightboxImg.onload = () => {
+                        lightboxImg.classList.remove('opacity-0', 'scale-95');
+                        lightboxImg.classList.add('opacity-100', 'scale-100');
+                    };
+                }, 200);
+            }
+
+            function nextPhoto() {
+                if (activePhotos.length === 0) return;
+                let nextIdx = currentPhotoIndex + 1;
+                if (nextIdx >= activePhotos.length) nextIdx = 0;
+                showPhoto(nextIdx);
+            }
+
+            function prevPhoto() {
+                if (activePhotos.length === 0) return;
+                let prevIdx = currentPhotoIndex - 1;
+                if (prevIdx < 0) prevIdx = activePhotos.length - 1;
+                showPhoto(prevIdx);
+            }
+
+            // Bind triggers
+            document.querySelectorAll('.project-card[data-category*="photo"]').forEach(card => {
+                const trigger = card.querySelector('.lightbox-trigger');
+                if (trigger) {
+                    trigger.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openLightbox(card.getAttribute('data-src'));
+                    });
+                }
+            });
+
+            if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+            if (lightboxPrev) lightboxPrev.addEventListener('click', prevPhoto);
+            if (lightboxNext) lightboxNext.addEventListener('click', nextPhoto);
+
+            // Background click to close
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target.id === 'lightbox-img' || e.target.classList.contains('relative') || e.target.classList.contains('flex-1')) {
+                    if (e.target !== lightboxPrev && e.target !== lightboxNext && !e.target.closest('#lightbox-prev') && !e.target.closest('#lightbox-next') && e.target.id !== 'lightbox-img') {
+                        closeLightbox();
+                    }
+                }
+            });
+
+            // Keyboard navigation
+            window.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('pointer-events-none')) return;
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowRight') {
+                    nextPhoto();
+                } else if (e.key === 'ArrowLeft') {
+                    prevPhoto();
+                }
+            });
+
         });
     </script>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex flex-col justify-between p-6">
+        <!-- Header: Counter & Close button -->
+        <div class="flex justify-between items-center w-full z-10">
+            <span id="lightbox-counter" class="text-sm font-semibold tracking-wider text-muted uppercase">01 / 00</span>
+            <button id="lightbox-close" class="text-primary hover:text-accent transition-colors p-2 magnetic" aria-label="Fermer la visionneuse">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Main content: Image & Navigation -->
+        <div class="relative flex-1 flex items-center justify-center w-full my-4">
+            <!-- Left Arrow -->
+            <button id="lightbox-prev" class="absolute left-0 md:left-4 z-20 text-primary hover:text-accent bg-black/40 hover:bg-black/60 p-3 rounded-full transition-all duration-300 transform -translate-y-1/2 top-1/2 hover:scale-105 magnetic" aria-label="Image précédente">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+
+            <!-- Image wrapper for transition -->
+            <div class="relative max-w-full max-h-[75vh] md:max-h-[80vh] flex items-center justify-center overflow-hidden rounded-2xl border border-white/5 shadow-2xl">
+                <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[75vh] md:max-h-[80vh] object-contain transition-all duration-500 transform scale-95 opacity-0">
+            </div>
+
+            <!-- Right Arrow -->
+            <button id="lightbox-next" class="absolute right-0 md:right-4 z-20 text-primary hover:text-accent bg-black/40 hover:bg-black/60 p-3 rounded-full transition-all duration-300 transform -translate-y-1/2 top-1/2 hover:scale-105 magnetic" aria-label="Image suivante">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Footer: Title & Subtitle -->
+        <div class="text-center w-full z-10 max-w-2xl mx-auto mb-4">
+            <h4 id="lightbox-title" class="text-2xl font-bold tracking-tight text-primary">Titre de la photo</h4>
+            <p id="lightbox-subtitle" class="text-sm text-muted mt-1">Description de la photo</p>
+        </div>
+    </div>
+
 </body>
 </html>

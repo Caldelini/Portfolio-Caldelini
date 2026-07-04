@@ -142,8 +142,36 @@ body {
     75% { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
 }
 
-/* Aberration chromatique sur les textes, boutons, étiquettes et particules, mais pas sur les médias */
-#particles-bg,
-h1, h2, h3, p, a, button, span, .glow-keyword, .skill-badge, .project-card > div.absolute {
-    filter: url(#chromatic-aberration);
+/* Aberration chromatique appliquée uniquement aux grands titres et mots-clés sur ordinateurs pour de superbes performances */
+@media (hover: hover) and (pointer: fine) {
+    h1, h2, h3, .glow-keyword {
+        filter: url(#chromatic-aberration);
+    }
+}
+
+/* --- CUSTOM LIGHTBOX STYLES --- */
+#lightbox {
+    will-change: opacity;
+}
+
+#lightbox-img {
+    will-change: transform, opacity;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Micro-animations pour les boutons de navigation de la visionneuse */
+#lightbox-prev svg, #lightbox-next svg, #lightbox-close svg {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#lightbox-prev:hover svg {
+    transform: translateX(-4px);
+}
+
+#lightbox-next:hover svg {
+    transform: translateX(4px);
+}
+
+#lightbox-close:hover svg {
+    transform: rotate(90deg);
 }
