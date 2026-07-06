@@ -6,6 +6,20 @@
     <title>Caldelini | Vidéaste Freelance</title>
     <meta name="description" content="Portfolio de Caldelini : Captation, montage, étalonnage, motion design.">
     
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://caldelini.fr">
+    <meta property="og:title" content="Caldelini | Vidéaste Freelance">
+    <meta property="og:description" content="Portfolio de Caldelini : Captation, montage, étalonnage, motion design.">
+    <meta property="og:image" content="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/Gros_pois_PP_copie_-_Moyenne_vomsoe">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://caldelini.fr">
+    <meta name="twitter:title" content="Caldelini | Vidéaste Freelance">
+    <meta name="twitter:description" content="Portfolio de Caldelini : Captation, montage, étalonnage, motion design.">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/Gros_pois_PP_copie_-_Moyenne_vomsoe">
+    
     <!-- Tailwind CSS (v3.4 via CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -73,19 +87,23 @@
                 <a href="#contact" class="hover:text-muted transition-colors">Contact</a>
             </div>
             <!-- Bouton Contact (Mobile & Desktop) -->
-            <a href="#contact" class="md:hidden text-sm font-medium border border-white/20 px-4 py-2 rounded-full">Contact</a>
+            <a href="#contact" class="md:hidden text-sm font-medium border border-white/20 px-4 py-2 rounded-full" aria-label="Me contacter">Contact</a>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
     <header class="relative z-10 min-h-screen flex items-center justify-center px-6 overflow-hidden">
         <div class="relative z-10 text-center max-w-4xl mx-auto mt-16">
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 animate-fade-in-up delay-100 flex flex-col gap-3 md:gap-4 items-center">
-                <span class="text-accent font-extrabold block">
-                    Un produit ? Un projet ? Une idée ?
+            <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 animate-fade-in-up delay-100 flex flex-col gap-3 md:gap-4 items-center">
+                <span class="text-accent font-extrabold block text-center">
+                    <span class="inline-block">Un produit&nbsp;?</span>
+                    <span class="inline-block">Un projet&nbsp;?</span>
+                    <span class="inline-block">Une idée&nbsp;?</span>
                 </span>
-                <span class="text-2xl md:text-4xl lg:text-5xl text-primary font-light block leading-tight mt-1 md:mt-2">
-                    J'ai du café, un œil et de l'équipement.
+                <span class="text-xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-light block leading-tight mt-1 md:mt-2 text-center">
+                    <span class="inline-block">J’ai du café,</span>
+                    <span class="inline-block">un œil</span>
+                    <span class="inline-block">et de l’équipement.</span>
                 </span>
             </h1>
             <p class="text-lg md:text-2xl text-muted mb-10 max-w-2xl mx-auto font-light animate-fade-in-up delay-200">
@@ -104,6 +122,19 @@
 
     <!-- SECTION SHOWREEL (Fixe, au-dessus des filtres) -->
     <section id="showreel" class="relative z-10 px-4 md:px-8 max-w-[1400px] mx-auto mb-24 animate-fade-in-up delay-400">
+        
+        <!-- Badges Compétences -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mb-10">
+            <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Brainstorm</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Captation Image & Son</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Post Production</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Motion design</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Prise de vue au stabilisateur</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Prise de vue Drone</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Camera Lumix (Netflix Approved)</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Retours fluides via Frame.io</span>
+        </div>
+
         <div class="w-full rounded-[2rem] md:rounded-[3rem] overflow-hidden aspect-video bg-surface relative group border border-white/10 shadow-2xl">
             <!-- Conteneur pour l'iframe YouTube dynamique (injecté au clic) -->
             <div id="showreel-video-placeholder" class="absolute inset-0 w-full h-full"></div>
@@ -145,13 +176,13 @@
             
             <!-- NOUVELLE BARRE DE FILTRES -->
             <div class="flex flex-wrap items-center gap-2" id="filter-container">
-                <button class="filter-btn active px-4 py-1.5 rounded-full text-sm font-medium border border-accent bg-accent/10 text-accent transition-all duration-300 hover:bg-accent/20" data-filter="all">Tout</button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="captation">Captation</button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="montage">Montage</button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="short">Short</button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="long">Format Long</button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="motion">Motion Design</button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="photo">Photo</button>
+                <button class="filter-btn active px-4 py-1.5 rounded-full text-sm font-medium border border-accent bg-accent/10 text-accent transition-all duration-300 hover:bg-accent/20" data-filter="all" aria-pressed="true">Tout</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="captation" aria-pressed="false">Captation</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="montage" aria-pressed="false">Montage</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="short" aria-pressed="false">Short</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="long" aria-pressed="false">Format Long</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="motion" aria-pressed="false">Motion Design</button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-sm font-medium border border-transparent text-muted hover:text-accent hover:bg-accent/5 transition-all duration-300" data-filter="photo" aria-pressed="false">Photo</button>
                 
                 <!-- Bouton de réinitialisation dynamique -->
                 <button id="reset-filters-btn" class="opacity-0 pointer-events-none transition-all duration-300 px-4 py-1.5 rounded-full text-sm font-medium border border-accent/25 text-muted hover:text-accent hover:border-accent hover:bg-accent/5 flex items-center gap-1.5 ml-2">
@@ -188,11 +219,11 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/x3A0G_xDY-A?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Teaser Musical — Lunedel"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/x3A0G_xDY-A?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Teaser Musical — Lunedel" aria-label="Lire la vidéo : Teaser Musical — Lunedel"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Teaser Musical — Lunedel</h3>
-                    <p class="text-muted text-sm mt-1">Spot promotionnel pour les réseaux sociaux à l'occasion de la sortie d'un EP.</p>
+                    <p class="text-muted text-sm mt-1">Spot promotionnel pour les réseaux sociaux à l’occasion de la sortie d’un EP.</p>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -216,11 +247,11 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/2IpWyiCuC-k?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Extrait Horizontal — Spectacle Claquettes"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/2IpWyiCuC-k?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Extrait Horizontal — Spectacle Claquettes" aria-label="Lire la vidéo : Extrait Horizontal — Spectacle Claquettes"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Extrait Horizontal — Spectacle de Claquettes</h3>
-                    <p class="text-muted text-sm mt-1">Captation en Open Gate d'un spectacle pour déclinaison sur les réseaux sociaux.</p>
+                    <p class="text-muted text-sm mt-1">Captation en Open Gate d’un spectacle pour déclinaison sur les réseaux sociaux.</p>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -243,7 +274,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/T7HDvgnwEc0?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Motion Design — Générique de Session"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/T7HDvgnwEc0?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Motion Design — Générique de Session" aria-label="Lire la vidéo : Motion Design — Générique de Session"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Teaser de rebranding — Edop</h3>
@@ -269,7 +300,7 @@
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Fausses Copines Cover</h3>
-                    <p class="text-muted text-sm mt-1">Visuel de couverture d'EP.</p>
+                    <p class="text-muted text-sm mt-1">Visuel de couverture d’EP.</p>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -294,7 +325,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/M5B1j45oY8s?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Mini-Docu — My Future"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/M5B1j45oY8s?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Mini-Docu — My Future" aria-label="Lire la vidéo : Mini-Docu — My Future"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Short promotionnel — Interview YouTube</h3>
@@ -342,7 +373,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/EdiEkWUsbeQ?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Visite la ferme Victor Maman et découvre le métier d'éleveur de moutons"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/EdiEkWUsbeQ?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Visite la ferme Victor Maman et découvre le métier d'éleveur de moutons" aria-label="Lire la vidéo : Visite la ferme Victor Maman et découvre le métier d’éleveur de moutons"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Vidéo reportage — Chez un Éleveur</h3>
@@ -390,10 +421,10 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/2g5Z92oPGzE?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Générique Show Musical"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/2g5Z92oPGzE?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Générique Show Musical" aria-label="Lire la vidéo : Générique Show Musical"></div>
                 </div>
                 <div class="p-5 mt-auto">
-                    <h3 class="text-xl font-semibold">Intro d'émission musicale — BRICKS</h3>
+                    <h3 class="text-xl font-semibold">Intro d’émission musicale — BRICKS</h3>
                     <p class="text-muted text-sm mt-1">Motion design réalisé sous After Effects.</p>
                 </div>
             </div>
@@ -418,11 +449,11 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/oe0iMpitYQU?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Reportage — Immersion Élevage Bovin"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/oe0iMpitYQU?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Reportage — Immersion Élevage Bovin" aria-label="Lire la vidéo : Reportage — Immersion Élevage Bovin"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Sélection de plans</h3>
-                    <p class="text-muted text-sm mt-1">Issu d'un exercice de reportage, étalonné à la manière du film Le Fabuleux Destin d'Amélie Poulain.</p>
+                    <p class="text-muted text-sm mt-1">Issu d’un exercice de reportage, étalonné à la manière du film Le Fabuleux Destin d’Amélie Poulain.</p>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -444,7 +475,7 @@
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Paysage Catalan</h3>
-                    <p class="text-muted text-sm mt-1">« Car on n'oublie pas d'où l'on vient »</p>
+                    <p class="text-muted text-sm mt-1">« Car on n’oublie pas d’où l’on vient »</p>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -508,7 +539,7 @@
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Arrivée du métro à La Ciotat</h3>
-                    <p class="text-muted text-sm mt-1">« L'Arrivée d'un train en gare de La Ciotat », version moderne. Vous l'avez ?</p>
+                    <p class="text-muted text-sm mt-1">« L’Arrivée d’un train en gare de La Ciotat », version moderne. Vous l’avez ?</p>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -532,10 +563,10 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/ycnWa-GYSTs?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Hyperlapse Urbain"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/ycnWa-GYSTs?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Hyperlapse Urbain" aria-label="Lire la vidéo : Hyperlapse Urbain"></div>
                 </div>
                 <div class="p-5 mt-auto">
-                    <h3 class="text-xl font-semibold">Essai d'hyperlapse sur Notre-Dame</h3>
+                    <h3 class="text-xl font-semibold">Essai d’hyperlapse sur Notre-Dame</h3>
                     <p class="text-muted text-sm mt-1">Création de contenu pour réseaux sociaux avec accroche visuelle (hook).</p>
                 </div>
             </div>
@@ -603,7 +634,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/Vz9R39ZLCT8?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Découvrir le métier de boucher !"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/Vz9R39ZLCT8?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Découvrir le métier de boucher !" aria-label="Lire la vidéo : Découvrir le métier de boucher !"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Vidéo reportage — Chez un Boucher</h3>
@@ -653,11 +684,11 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/LKrVih2YZNo?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Échappée Nordique"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/LKrVih2YZNo?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Échappée Nordique" aria-label="Lire la vidéo : Échappée Nordique"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Short sur la Norvège</h3>
-                    <p class="text-muted text-sm mt-1">Reprise d'une tendance (trend) pour contenu réseaux sociaux.</p>
+                    <p class="text-muted text-sm mt-1">Reprise d’une tendance (trend) pour contenu réseaux sociaux.</p>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -665,7 +696,7 @@
 
             <!-- [DEBUT] PHOTO: FOCUS CAROTTE                                              -->
             <!-- ================================================================= -->
-            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-1" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Carotte_ql9yxv" data-title="Portrait d'une femme insouciante">
+            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-1" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178797/Carotte_ql9yxv" data-title="Portrait d’une femme insouciante">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
                 </div>
@@ -678,7 +709,7 @@
                     </div>
                 </div>
                 <div class="p-5 mt-auto">
-                    <h3 class="text-xl font-semibold">Portrait d'une femme insouciante</h3>
+                    <h3 class="text-xl font-semibold">Portrait d’une femme insouciante</h3>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -702,7 +733,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/mFf2C40y6HU?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Teaser Casting"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/mFf2C40y6HU?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Teaser Casting" aria-label="Lire la vidéo : Teaser Casting"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Short : Appel à figuration</h3>
@@ -714,7 +745,7 @@
 
             <!-- [DEBUT] PHOTO: RÊVERIE                                              -->
             <!-- ================================================================= -->
-            <div class="animate-fade-in-up delay-300 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178796/42307685-CF0C-4555-84EE-EFDF60C90C95-862-0000019A7FB9B1CA_vyo9c9" data-title="Portrait d'homme à la cigarette">
+            <div class="animate-fade-in-up delay-300 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-2 lg:col-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178796/42307685-CF0C-4555-84EE-EFDF60C90C95-862-0000019A7FB9B1CA_vyo9c9" data-title="Portrait d’homme à la cigarette">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
                 </div>
@@ -727,7 +758,7 @@
                     </div>
                 </div>
                 <div class="p-5 mt-auto">
-                    <h3 class="text-xl font-semibold">Portrait d'homme à la cigarette</h3>
+                    <h3 class="text-xl font-semibold">Portrait d’homme à la cigarette</h3>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -817,7 +848,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.instagram.com/reel/C8ejm8ONe5N/embed" data-title="Teaser Corporate Médical"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.instagram.com/reel/C8ejm8ONe5N/embed" data-title="Teaser Corporate Médical" aria-label="Lire la vidéo : Teaser Corporate Médical"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Short promotionnel — Congrès Médical</h3>
@@ -885,7 +916,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/_jha7Bn6DAc?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Motion Design — Habillage Graphique"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/_jha7Bn6DAc?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Motion Design — Habillage Graphique" aria-label="Lire la vidéo : Motion Design — Habillage Graphique"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Animation de logo pour Web TV</h3>
@@ -896,7 +927,7 @@
 
             <!-- [DEBUT] PHOTO: ERRANCE AU VIETNAM                                              -->
             <!-- ================================================================= -->
-            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178216/Vietnam-2-2_-_Grande_sxjqvq" data-title="Baie d'Halong">
+            <div class="animate-fade-in-up delay-100 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178216/Vietnam-2-2_-_Grande_sxjqvq" data-title="Baie d’Halong">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
                 </div>
@@ -909,7 +940,7 @@
                     </div>
                 </div>
                 <div class="p-5 mt-auto">
-                    <h3 class="text-xl font-semibold">Baie d'Halong</h3>
+                    <h3 class="text-xl font-semibold">Baie d’Halong</h3>
                     <p class="text-muted text-sm mt-1">Vietnam</p>
                 </div>
             </div>
@@ -918,7 +949,7 @@
 
             <!-- [DEBUT] PHOTO: SÉRÉNITÉ AU VIETNAM                                              -->
             <!-- ================================================================= -->
-            <div class="animate-fade-in-up delay-200 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178215/Vietnam-3_-_Grande_jkdqbp" data-title="Baie d'Halong">
+            <div class="animate-fade-in-up delay-200 project-card bento-card bg-surface relative group rounded-3xl overflow-hidden p-2 flex flex-col md:col-span-1 lg:col-span-1 md:row-span-2" data-category="photo" data-src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178215/Vietnam-3_-_Grande_jkdqbp" data-title="Baie d’Halong">
                 <div class="absolute top-6 left-6 z-10 flex flex-wrap gap-1.5">
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
                 </div>
@@ -931,7 +962,7 @@
                     </div>
                 </div>
                 <div class="p-5 mt-auto">
-                    <h3 class="text-xl font-semibold">Baie d'Halong</h3>
+                    <h3 class="text-xl font-semibold">Baie d’Halong</h3>
                     <p class="text-muted text-sm mt-1">Vietnam</p>
                 </div>
             </div>
@@ -958,7 +989,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.instagram.com/reel/DO_L-zAEbMu/embed" data-title="Édition Podcast — Nina Ramen"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.instagram.com/reel/DO_L-zAEbMu/embed" data-title="Édition Podcast — Nina Ramen" aria-label="Lire la vidéo : Édition Podcast — Nina Ramen"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Short promotionnel — Podcast</h3>
@@ -1027,7 +1058,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/R3LmeaxLwJs?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Motion Design — Infographie Animée"></div>
+                    <div class="absolute inset-0 z-20 cursor-pointer iframe-overlay" data-video-src="https://www.youtube.com/embed/R3LmeaxLwJs?autoplay=1&controls=1&rel=0&playsinline=1&modestbranding=1" data-title="Motion Design — Infographie Animée" aria-label="Lire la vidéo : Motion Design — Infographie Animée"></div>
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Teaser animé — Congrès Médical</h3>
@@ -1149,7 +1180,7 @@
                     <span class="px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold tracking-wider text-white border border-white/10 group-hover:border-accent/40 group-hover:text-accent transition-colors duration-300 uppercase">Photo</span>
                 </div>
                 <div class="flex-1 relative rounded-2xl overflow-hidden bg-black group aspect-video md:aspect-auto cursor-pointer lightbox-trigger">
-                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178857/Chapeau-346_-_Grande_d321rh" alt="L'Homme au Chapeau" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+                    <img src="https://res.cloudinary.com/dsm8nju1g/image/upload/f_auto,q_auto/v1783178857/Chapeau-346_-_Grande_d321rh" alt="L’Homme au Chapeau" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
                     <div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <svg class="w-8 h-8 text-white drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
@@ -1179,7 +1210,7 @@
                 </div>
                 <div class="p-5 mt-auto">
                     <h3 class="text-xl font-semibold">Portrait</h3>
-                    <p class="text-muted text-sm mt-1">Photo issue d'un wwoofing réalisé en Norvège</p>
+                    <p class="text-muted text-sm mt-1">Photo issue d’un wwoofing réalisé en Norvège</p>
                 </div>
             </div>
             <!-- ================================================================= -->
@@ -1222,38 +1253,27 @@
                      loading="lazy">
             </div>
             <div class="w-full md:w-2/3">
-                <h1 class="text-3xl font-bold tracking-tight mb-2">Un couteau suisse à votre service.</h1>
+                <h2 class="text-3xl font-bold tracking-tight mb-2">Un couteau suisse à votre service.</h2>
                 <span class="text-sm text-muted/70 block mb-6 font-medium italic">(Nationalité non incluse)</span>
                 <div class="space-y-6 text-muted font-light leading-relaxed">
                     <p>
                         Vous avez demandé un <span class="glow-keyword">créatif</span> cinéphile geek passionné par l’image qui adore voyager et découvrir des milieux différents ?
                     </p>
                     <p>
-                        Moi, c’est <span class="glow-keyword">Enzo</span>. Enchanté :)
+                        Moi, c’est <span class="glow-keyword">Enzo</span>. Enchanté !
                     </p>
                     <p>
-                        <span class="glow-keyword">De la première intention à la livraison finale</span>, que vous soyez une marque, une agence, un(e) artiste, ou un canard (encore plus dans ce cas de figure), et que vous ayez un besoin de visibilité ou un contenu précis en tête, <span class="glow-keyword">je m'adapte à vos besoins</span> afin de mettre en images vos envies.
+                        <span class="glow-keyword">De la première intention à la livraison finale</span>, que vous soyez une marque, une agence, un(e) artiste, ou un canard (encore plus dans ce cas de figure), et que vous ayez un besoin de visibilité ou un contenu précis en tête, <span class="glow-keyword">je m’adapte à vos besoins</span> afin de mettre en images vos envies.
                     </p>
                     <p>
                         Mon expérience me permet d’intervenir à <span class="glow-keyword">toutes les étapes</span> : production, captation, réalisation, post-production et même diffusion en streaming. Que vous cherchiez un prestataire pour une action ciblée ou un partenaire pour vous accompagner sur l’ensemble du projet, <span class="glow-keyword">je suis votre vidéaste</span>.
                     </p>
                     <p>
-                        Mes engagements sont simples : assurer un <span class="glow-keyword">rendu professionnel</span>, vous aider à construire une <span class="glow-keyword">identité visuelle forte</span>, garantir un <span class="glow-keyword">rythme maîtrisé</span> et livrer des <span class="glow-keyword">projets propres</span> qui sortent <span class="glow-keyword">à l'heure</span>. Le tout repose sur une excellente communication, des échanges fluides et un accompagnement basé sur des retours clairs.
+                        Mes engagements sont simples : assurer un <span class="glow-keyword">rendu professionnel</span>, vous aider à construire une <span class="glow-keyword">identité visuelle forte</span>, garantir un <span class="glow-keyword">rythme maîtrisé</span> et livrer des <span class="glow-keyword">projets propres</span> qui sortent <span class="glow-keyword">à l’heure</span>. Le tout repose sur une excellente communication, des échanges fluides et un accompagnement basé sur des retours clairs.
                     </p>
                     <p>
-                        Bref. Si vous avez une idée à concrétiser, on en discute autour d'un café (ou d'un script). <span class="glow-keyword">À tout de suite !</span>
+                        Bref. Si vous avez une idée à concrétiser, on en discute autour d’un café (ou d’un script). <span class="glow-keyword">À tout de suite !</span>
                     </p>
-                </div>
-                <div class="mt-8 flex flex-wrap gap-3">
-                    <!-- Badges Compétences -->
-                    <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Brainstorm</span>
-                    <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Captation Image & Son</span>
-                    <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Post Production</span>
-                    <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Motion design</span>
-                    <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Prise de vue au stabilisateur</span>
-                    <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Prise de vue Drone</span>
-                    <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Camera Lumix (Netflix Approved)</span>
-                    <span class="px-4 py-2 rounded-full border border-white/10 text-sm bg-white/5 text-primary backdrop-blur-md cursor-default skill-badge magnetic">Retours fluides via Frame.io</span>
                 </div>
             </div>
         </div>
@@ -1301,9 +1321,11 @@
                     if (b.classList.contains('active')) {
                         b.classList.remove('border-transparent', 'text-muted', 'hover:bg-accent/5');
                         b.classList.add('border-accent', 'bg-accent/10', 'text-accent', 'hover:bg-accent/20');
+                        b.setAttribute('aria-pressed', 'true');
                     } else {
                         b.classList.remove('border-accent', 'bg-accent/10', 'text-accent', 'hover:bg-accent/20');
                         b.classList.add('border-transparent', 'text-muted', 'hover:bg-accent/5');
+                        b.setAttribute('aria-pressed', 'false');
                     }
                 });
 

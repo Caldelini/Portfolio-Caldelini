@@ -87,7 +87,8 @@ body {
 .project-card {
     will-change: transform, opacity;
     opacity: 1;
-    transform: scale(1);
+    transform: translate3d(0,0,0);
+    backface-visibility: hidden;
     filter: blur(0px) grayscale(0%);
 }
 .project-card.is-hidden {
