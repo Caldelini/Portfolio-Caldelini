@@ -162,51 +162,14 @@ body {
 
 /* Aberration chromatique appliquée uniquement aux grands titres et mots-clés sur ordinateurs pour de superbes performances */
 @media (hover: hover) and (pointer: fine) {
-    h1, h2, h3, .glow-keyword {
+    h1 > span, h1:not(:has(span)), h2, h3, .glow-keyword {
         filter: url(#chromatic-aberration);
+        will-change: transform, filter;
+        transform: translateZ(0); /* Force le rendu GPU sur les lignes de texte individuelles pour corriger les bugs de lignes de découpage flexbox */
     }
 }
 
-/* Personnalisation des View Transitions pour un effet haut de gamme */
-::view-transition-group(root) {
-    animation: none;
-}
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation: none !important;
-    mix-blend-mode: normal;
-}
 
-/* Vitesse globale de transition des éléments */
-::view-transition-group(*) {
-    animation-duration: 0.5s;
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Animation d'effacement (fade-out + scale-down) */
-::view-transition-old(*) {
-    animation: fade-out 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-               scale-down 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Animation d'apparition (fade-in + scale-up) */
-::view-transition-new(*) {
-    animation: fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-               scale-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes fade-out {
-    to { opacity: 0; }
-}
-@keyframes fade-in {
-    from { opacity: 0; }
-}
-@keyframes scale-down {
-    to { transform: scale(0.95); }
-}
-@keyframes scale-up {
-    from { transform: scale(0.95); }
-}
 
 /* Effet Glow & Magnétique pour les Badges de Compétences (À Propos) */
 .skill-badge {

@@ -1226,22 +1226,22 @@
                 <span class="text-sm text-muted/70 block mb-6 font-medium italic">(Nationalité non incluse)</span>
                 <div class="space-y-6 text-muted font-light leading-relaxed">
                     <p>
-                        Vous avez demandé un <span class="glow-keyword">créatif cinéphile geek</span> passionné par l’image qui adore voyager et découvrir des milieux différents ?
+                        Vous avez demandé un <span class="glow-keyword">créatif</span> cinéphile geek passionné par l’image qui adore voyager et découvrir des milieux différents ?
                     </p>
                     <p>
-                        Moi, c’est Enzo. Enchanté :)
+                        Moi, c’est <span class="glow-keyword">Enzo</span>. Enchanté :)
                     </p>
                     <p>
                         <span class="glow-keyword">De la première intention à la livraison finale</span>, que vous soyez une marque, une agence, un(e) artiste, ou un canard (encore plus dans ce cas de figure), et que vous ayez un besoin de visibilité ou un contenu précis en tête, <span class="glow-keyword">je m'adapte à vos besoins</span> afin de mettre en images vos envies.
                     </p>
                     <p>
-                        Mon expérience me permet d’intervenir à <span class="glow-keyword">toutes les étapes</span> : production, captation, réalisation, post-production et même diffusion en streaming. Que vous cherchiez un prestataire pour une action ciblée ou un partenaire pour vous accompagner sur l’ensemble du projet, je suis votre vidéaste.
+                        Mon expérience me permet d’intervenir à <span class="glow-keyword">toutes les étapes</span> : production, captation, réalisation, post-production et même diffusion en streaming. Que vous cherchiez un prestataire pour une action ciblée ou un partenaire pour vous accompagner sur l’ensemble du projet, <span class="glow-keyword">je suis votre vidéaste</span>.
                     </p>
                     <p>
                         Mes engagements sont simples : assurer un <span class="glow-keyword">rendu professionnel</span>, vous aider à construire une <span class="glow-keyword">identité visuelle forte</span>, garantir un <span class="glow-keyword">rythme maîtrisé</span> et livrer des <span class="glow-keyword">projets propres</span> qui sortent <span class="glow-keyword">à l'heure</span>. Le tout repose sur une excellente communication, des échanges fluides et un accompagnement basé sur des retours clairs.
                     </p>
                     <p>
-                        Bref. Si vous avez une idée à concrétiser, on en discute autour d'un café (ou d'un script). À tout de suite :)
+                        Bref. Si vous avez une idée à concrétiser, on en discute autour d'un café (ou d'un script). <span class="glow-keyword">À tout de suite !</span>
                     </p>
                 </div>
                 <div class="mt-8 flex flex-wrap gap-3">
@@ -1320,14 +1320,15 @@
                 }
             }
 
-            // Exécute la mise à jour d'état avec des transitions CSS Tailwind (fluides et compatibles vidéo)
+            // Exécute la mise à jour d'état avec des transitions fluides séquencées (Fade Out -> Layout Shift -> Fade In)
             function applyFilterStateChange(stateChangeFn) {
-                stateChangeFn();
-
                 const portfolioGrid = document.getElementById('portfolio-grid');
                 if (portfolioGrid) {
                     portfolioGrid.classList.add('pointer-events-none');
                 }
+
+                // Appliquer les modifications d'état des boutons
+                stateChangeFn();
 
                 const activeSpecificFilters = Array.from(filterBtns)
                     .filter(b => b.getAttribute('data-filter') !== 'all' && b.classList.contains('active'))
@@ -1337,7 +1338,6 @@
                 const projectsToShow = [];
 
                 projects.forEach(project => {
-                    // Supprimer l'animation d'entrée initiale pour éviter les conflits
                     project.classList.remove('animate-fade-in-up');
 
                     let shouldBeVisible = false;
@@ -1355,62 +1355,79 @@
                     }
                 });
 
-                // Éléments à masquer : transition de sortie
+                // --- ÉTAPE 1 : FADE OUT des éléments à masquer ---
+                let hideCount = 0;
                 projectsToHide.forEach(project => {
                     if (!project.classList.contains('is-hidden')) {
-                        project.classList.add('transition-all', 'duration-500');
-                        project.classList.remove('opacity-100', 'scale-100');
-                        project.classList.add('opacity-0', 'scale-95');
+                        project.style.transition = 'opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+                        project.style.opacity = '0';
+                        project.style.transform = 'scale(0.95)';
+                        hideCount++;
                     }
                 });
 
-                // Éléments à afficher : préparation visuelle
-                projectsToShow.forEach(project => {
-                    if (project.classList.contains('is-hidden')) {
-                        project.classList.remove('is-hidden');
-                        project.classList.add('transition-all', 'duration-500', 'opacity-0', 'scale-95');
-                    }
-                });
+                // Si aucune carte ne doit être masquée, on procède directement sans délai
+                const delay = hideCount > 0 ? 200 : 0;
 
-                // Forcer un reflow matériel
-                if (projects.length > 0) {
-                    projects[0].offsetHeight;
-                }
-
-                // Lancement de la transition d'entrée pour les éléments à afficher
-                projectsToShow.forEach(project => {
-                    project.classList.remove('opacity-0', 'scale-95');
-                    project.classList.add('opacity-100', 'scale-100');
-                });
-
-                // Finalisation après la fin de la transition (500ms)
                 setTimeout(() => {
+                    // --- ÉTAPE 2 : MISE À JOUR DU LAYOUT (display: none / block) ---
                     projectsToHide.forEach(project => {
                         project.classList.add('is-hidden');
-                        project.classList.remove('transition-all', 'duration-500', 'opacity-0', 'scale-95', 'opacity-100', 'scale-100');
+                        // Réinitialisation des styles de transition temporaires
+                        project.style.transition = '';
+                        project.style.opacity = '';
+                        project.style.transform = '';
                     });
 
                     projectsToShow.forEach(project => {
-                        project.classList.remove('transition-all', 'duration-500', 'opacity-0', 'scale-95', 'opacity-100', 'scale-100');
+                        if (project.classList.contains('is-hidden')) {
+                            project.classList.remove('is-hidden');
+                        }
+                        // Préparer invisible à 0 pour le Fade In
+                        project.style.transition = 'none';
+                        project.style.opacity = '0';
+                        project.style.transform = 'scale(0.95)';
                     });
 
-                    // Message "Aucun résultat"
-                    const noResultsMsg = document.getElementById('no-results-msg');
-                    if (noResultsMsg) {
-                        const visibleProjectsCount = Array.from(projects).filter(p => !p.classList.contains('is-hidden')).length;
-                        if (visibleProjectsCount === 0) {
-                            noResultsMsg.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
-                            noResultsMsg.classList.add('opacity-100', 'visible', 'pointer-events-auto');
-                        } else {
-                            noResultsMsg.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
-                            noResultsMsg.classList.add('opacity-0', 'invisible', 'pointer-events-none');
-                        }
+                    // Forcer un reflow matériel
+                    if (projects.length > 0) {
+                        projects[0].offsetHeight;
                     }
 
-                    if (portfolioGrid) {
-                        portfolioGrid.classList.remove('pointer-events-none');
-                    }
-                }, 500);
+                    // --- ÉTAPE 3 : FADE IN des éléments à afficher ---
+                    projectsToShow.forEach(project => {
+                        project.style.transition = 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+                        project.style.opacity = '1';
+                        project.style.transform = 'scale(1)';
+                    });
+
+                    // Nettoyer les styles de transition après la fin du Fade In
+                    setTimeout(() => {
+                        projectsToShow.forEach(project => {
+                            project.style.transition = '';
+                            project.style.opacity = '';
+                            project.style.transform = '';
+                        });
+
+                        // Message "Aucune réalisation"
+                        const noResultsMsg = document.getElementById('no-results-msg');
+                        if (noResultsMsg) {
+                            const visibleProjectsCount = Array.from(projects).filter(p => !p.classList.contains('is-hidden')).length;
+                            if (visibleProjectsCount === 0) {
+                                noResultsMsg.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+                                noResultsMsg.classList.add('opacity-100', 'visible', 'pointer-events-auto');
+                            } else {
+                                noResultsMsg.classList.remove('opacity-100', 'visible', 'pointer-events-auto');
+                                noResultsMsg.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+                            }
+                        }
+
+                        if (portfolioGrid) {
+                            portfolioGrid.classList.remove('pointer-events-none');
+                        }
+                    }, 300);
+
+                }, delay);
             }
 
             // Écouteurs de clic sur les boutons de filtres
@@ -1477,8 +1494,8 @@
             // Paramètres d'optimisation (très fin, très discret, performant)
             // Détection des appareils tactiles pour adapter le nombre de particules
             const isTouchDevice = !window.matchMedia('(hover: hover)').matches;
-            // Réduction du nombre maximal de particules pour économiser les calculs GPU/CPU
-            const PARTICLE_COUNT = isTouchDevice ? 10 : Math.min(window.innerWidth / 20, 60);
+            // Nombre de particules équilibré pour un effet riche et fluide
+            const PARTICLE_COUNT = isTouchDevice ? 25 : Math.min(window.innerWidth / 10, 120);
 
             // Mise en cache locale des dimensions du canvas pour éviter de requêter le DOM à chaque frame
             let canvasWidth = window.innerWidth;
@@ -1544,12 +1561,12 @@
                     this.x = Math.random() * canvasWidth;
                     this.y = Math.random() * canvasHeight;
                     this.size = Math.random() * 2 + 0.5; // Profondeur avec différentes tailles
-                    this.vx = (Math.random() - 0.5) * 0.2; // Dérive horizontale très lente
-                    this.vy = -(Math.random() * 0.4 + 0.1); // Flottement lent vers le haut
+                    this.vx = (Math.random() - 0.5) * 0.4; // Dérive horizontale accélérée
+                    this.vy = -(Math.random() * 0.8 + 0.2); // Flottement accéléré vers le haut
                     this.alpha = Math.random() * 0.35 + 0.05; // Opacité aléatoire
                     // 15% de braises rouges cinéma, 85% de poussières blanches de projecteur
                     this.isRed = Math.random() > 0.85;
-                    this.pulseSpeed = Math.random() * 0.02 + 0.005;
+                    this.pulseSpeed = Math.random() * 0.03 + 0.01; // Pulsation plus dynamique
                     this.pulsePhase = Math.random() * Math.PI * 2;
                 }
 
