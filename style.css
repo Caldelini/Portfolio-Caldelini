@@ -10,6 +10,8 @@ body {
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    max-width: 100%;
+    overflow-x: hidden; /* Prévient les saccades de scroll horizontal lors des animations d'entrée */
 }
 
 /* Canvas Particules Background */
@@ -19,7 +21,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 0;
+    z-index: 0; /* Placé au-dessus du fond du body, mais sous le contenu z-10 */
     pointer-events: none;
 }
 
@@ -42,12 +44,6 @@ body {
 }
 
 /* Animations d'entrée (Fade In Up) */
-.animate-fade-in-up {
-    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -59,6 +55,12 @@ body {
     }
 }
 
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
 /* Delays pour cascade d'animation */
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
@@ -66,19 +68,30 @@ body {
 .delay-400 { animation-delay: 400ms; }
 .delay-500 { animation-delay: 500ms; }
 
-/* Effet Glassmorphism pour les cartes Bento */
+/* Effet Bento Card Premium (Inspiré de TryKala) */
 .bento-card {
     background: rgba(23, 23, 23, 0.4);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .bento-card:hover {
     transform: scale(1.01) translateY(-2px);
     border-color: rgba(229, 9, 20, 0.3);
     box-shadow: 0 10px 30px -10px rgba(229, 9, 20, 0.15);
+}
+
+/* CSS pour le filtrage par opacité croisée (Focus) */
+.project-card {
+    will-change: transform, opacity;
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px) grayscale(0%);
+}
+.project-card.is-hidden {
+    display: none !important;
 }
 
 /* Container pour iframe responsif si nécessaire */
@@ -120,6 +133,11 @@ body {
 
 .project-card.is-active .iframe-overlay {
     pointer-events: none;
+    opacity: 0;
+}
+
+.project-card .iframe-overlay {
+    transition: opacity 0.3s ease, pointer-events 0.3s ease;
 }
 
 /* Couches Texture Vintage (Grain Cinéma & Aberration Chromatique) */
@@ -147,6 +165,89 @@ body {
     h1, h2, h3, .glow-keyword {
         filter: url(#chromatic-aberration);
     }
+}
+
+/* Personnalisation des View Transitions pour un effet haut de gamme */
+::view-transition-group(root) {
+    animation: none;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none !important;
+    mix-blend-mode: normal;
+}
+
+/* Vitesse globale de transition des éléments */
+::view-transition-group(*) {
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animation d'effacement (fade-out + scale-down) */
+::view-transition-old(*) {
+    animation: fade-out 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+               scale-down 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animation d'apparition (fade-in + scale-up) */
+::view-transition-new(*) {
+    animation: fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+               scale-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fade-out {
+    to { opacity: 0; }
+}
+@keyframes fade-in {
+    from { opacity: 0; }
+}
+@keyframes scale-down {
+    to { transform: scale(0.95); }
+}
+@keyframes scale-up {
+    from { transform: scale(0.95); }
+}
+
+/* Effet Glow & Magnétique pour les Badges de Compétences (À Propos) */
+.skill-badge {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.skill-badge:hover {
+    transform: scale(1.05);
+    border-color: rgba(229, 9, 20, 0.4);
+    color: #FAFAFA;
+    background-color: rgba(229, 9, 20, 0.08);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.25);
+}
+
+/* Mots-clés Lumineux Cinéma */
+.glow-keyword {
+    color: #E50914; /* Rouge cinéma (text-accent) de base */
+    text-shadow: 0 0 8px rgba(229, 9, 20, 0.6), 0 0 15px rgba(229, 9, 20, 0.3); /* Effet glow rouge de base */
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                text-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+    font-weight: 500;
+}
+.glow-keyword:hover {
+    color: #FAFAFA; /* Devient blanc au survol */
+    text-shadow: 0 0 10px rgba(229, 9, 20, 0.8), 0 0 20px rgba(229, 9, 20, 0.5); /* Surlignage rouge plus intense au survol */
+}
+
+/* Effet Glow pour le bouton Showreel */
+.shadow-accent-glow {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.shadow-accent-glow:hover {
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
 }
 
 /* --- CUSTOM LIGHTBOX STYLES --- */
